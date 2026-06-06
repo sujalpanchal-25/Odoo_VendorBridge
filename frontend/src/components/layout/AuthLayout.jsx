@@ -1,10 +1,15 @@
 import React from 'react';
-import { Outlet, Navigate } from 'react-router-dom';
+import { Outlet, Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 export default function AuthLayout() {
   const { isAuthenticated } = useSelector((s) => s.auth);
+  const location = useLocation();
+  
   if (isAuthenticated) return <Navigate to="/dashboard" replace />;
+
+  const isRegister = location.pathname.includes('/register');
+  const cardMaxWidth = isRegister ? '560px' : '420px';
 
   return (
     <div style={{
@@ -20,16 +25,14 @@ export default function AuthLayout() {
       {/* Logo Container */}
       <div style={{ marginBottom: '32px', textAlign: 'center' }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '14px' }}>
-          {/* Minimalist Professional Logo Icon (Transparent BG) */}
-          <svg width="38" height="38" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            {/* Bridge arch - dark charcoal for high visibility */}
-            <path d="M6 22C10 14 22 14 26 22" stroke="var(--brand-black)" strokeWidth="2.5" strokeLinecap="round"/>
-            {/* Roadbed/horizontal line */}
-            <path d="M4 22H28" stroke="var(--brand-black)" strokeWidth="2" strokeLinecap="round"/>
-            {/* Vertical suspension hangers - brand amber highlights */}
-            <path d="M11 17V22" stroke="var(--brand-amber)" strokeWidth="2" strokeLinecap="round"/>
-            <path d="M16 15V22" stroke="var(--brand-amber)" strokeWidth="2" strokeLinecap="round"/>
-            <path d="M21 17V22" stroke="var(--brand-amber)" strokeWidth="2" strokeLinecap="round"/>
+          {/* Minimalist Interconnected Bridge Logo Icon (Transparent BG) */}
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {/* Left Node */}
+            <circle cx="5" cy="12" r="3" fill="var(--brand-black)" />
+            {/* Right Node */}
+            <circle cx="19" cy="12" r="3" fill="var(--brand-black)" />
+            {/* S-shaped Bridge Connection Curve */}
+            <path d="M5 12C9 6 15 18 19 12" stroke="var(--brand-amber)" strokeWidth="3" strokeLinecap="round" />
           </svg>
           <span style={{ 
             fontFamily: "var(--font-brand)", 
@@ -43,15 +46,16 @@ export default function AuthLayout() {
         </div>
       </div>
 
-      {/* Modern minimal Form Card */}
+      {/* Modern minimal Form Card with dynamic width */}
       <div style={{
         width: '100%',
-        maxWidth: '420px',
+        maxWidth: cardMaxWidth,
         backgroundColor: 'var(--card-bg)',
         border: '1px solid var(--border-color)',
         borderRadius: 'var(--radius-lg)',
         padding: '40px 36px',
         boxShadow: '0 4px 6px -1px rgba(9, 9, 11, 0.05), 0 10px 15px -3px rgba(9, 9, 11, 0.03)',
+        transition: 'max-width 0.2s ease',
       }}>
         <Outlet />
       </div>
