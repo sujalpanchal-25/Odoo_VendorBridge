@@ -19,9 +19,9 @@ export default function AuthLayout() {
     }}>
       {/* Logo Container */}
       <div style={{ marginBottom: '32px', textAlign: 'center' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '14px' }}>
           {/* Minimalist Professional Logo Icon (Transparent BG) */}
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg width="38" height="38" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             {/* Bridge arch - dark charcoal for high visibility */}
             <path d="M6 22C10 14 22 14 26 22" stroke="var(--brand-black)" strokeWidth="2.5" strokeLinecap="round"/>
             {/* Roadbed/horizontal line */}
@@ -33,10 +33,10 @@ export default function AuthLayout() {
           </svg>
           <span style={{ 
             fontFamily: "var(--font-brand)", 
-            fontSize: '20px', 
-            fontWeight: 700, 
+            fontSize: '25px', 
+            fontWeight: 800, 
             color: 'var(--text-primary)', 
-            letterSpacing: '-0.03em' 
+            letterSpacing: '-0.04em' 
           }}>
             VendorBridge
           </span>
