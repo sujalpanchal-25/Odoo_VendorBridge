@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-export default function Modal({ isOpen, onClose, title, children, maxWidth = '500px' }) {
+export default function Modal({ isOpen, onClose, title, children, maxWidth = '500px', closeOnBackdropClick = false }) {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -30,7 +30,11 @@ export default function Modal({ isOpen, onClose, title, children, maxWidth = '50
         padding: '16px',
         backdropFilter: 'blur(4px)'
       }} 
-      onClick={onClose}
+      onClick={(e) => {
+        if (closeOnBackdropClick && e.target === e.currentTarget) {
+          onClose();
+        }
+      }}
     >
       <div 
         className="card" 
