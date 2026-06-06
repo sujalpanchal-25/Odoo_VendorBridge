@@ -56,6 +56,34 @@ export default function Profile() {
 
   return (
     <div className="page-wrapper">
+      {/* Responsive Styles injected for Mobile & Tablet */}
+      <style>
+        {`
+          .responsive-profile-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 24px;
+          }
+          .responsive-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+          }
+          /* Tablet Breakpoint */
+          @media (max-width: 992px) {
+            .responsive-profile-layout {
+              grid-template-columns: 1fr;
+            }
+          }
+          /* Mobile Breakpoint */
+          @media (max-width: 768px) {
+            .responsive-form-grid {
+              grid-template-columns: 1fr;
+            }
+          }
+        `}
+      </style>
+
       {/* Page Header */}
       <div style={{ marginBottom: '32px' }}>
         <h1 style={{ fontSize: '28px', color: 'var(--text-primary)', marginBottom: '4px' }}>My Account Profile</h1>
@@ -64,7 +92,7 @@ export default function Profile() {
         </p>
       </div>
 
-      <div className="grid-3" style={{ gridTemplateColumns: '1fr 2fr', gap: '24px' }}>
+      <div className="grid-3 responsive-profile-layout">
         {/* Left Column: Avatar & Summary Card */}
         <Card style={{ textAlign: 'center', height: 'fit-content' }}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
@@ -147,7 +175,7 @@ export default function Profile() {
           </h3>
 
           <form onSubmit={handleSubmit}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+            <div className="responsive-form-grid">
               <Input
                 label="First Name"
                 value={firstName}
@@ -162,7 +190,7 @@ export default function Profile() {
               />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+            <div className="responsive-form-grid">
               <Input
                 label="Phone Number"
                 placeholder="+91 XXXXX XXXXX"
