@@ -54,11 +54,26 @@ export default function Sidebar() {
           borderBottom: '1px solid #334155'
         }}
       >
-        <svg width="150" height="30" viewBox="0 0 150 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <text x="0" y="22" fill="#FFFFFF" fontSize="20" fontWeight="bold" fontFamily="var(--font-display)">
-            Vendor<tspan fill="var(--accent-color)">Bridge</tspan>
-          </text>
-        </svg>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          {/* Logo Icon with White Nodes for Dark Sidebar BG */}
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {/* Left Node */}
+            <circle cx="5" cy="12" r="3" fill="#FFFFFF" />
+            {/* Right Node */}
+            <circle cx="19" cy="12" r="3" fill="#FFFFFF" />
+            {/* S-shaped Bridge Connection Curve */}
+            <path d="M5 12C9 6 15 18 19 12" stroke="var(--brand-amber)" strokeWidth="3" strokeLinecap="round" />
+          </svg>
+          <span style={{ 
+            fontFamily: "var(--font-brand)", 
+            fontSize: '18px', 
+            fontWeight: 800, 
+            color: '#FFFFFF', 
+            letterSpacing: '-0.04em' 
+          }}>
+            VendorBridge
+          </span>
+        </div>
       </div>
 
       <nav 
