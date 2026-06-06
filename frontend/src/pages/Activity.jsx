@@ -13,12 +13,21 @@ import { showToast } from '../components/common/Toast.jsx';
 export default function Activity() {
   const { user } = useSelector((state) => state.auth);
 
+  const isManagerOrAdmin = user?.role === 'admin' || user?.role === 'manager';
+
   // States
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
-  const [viewScope, setViewScope] = useState('all'); // 'all' or 'mine'
+  const [viewScope, setViewScope] = useState('mine'); // Default to 'mine' for safety
+
+  // Update scope when user role is available
+  useEffect(() => {
+    if (isManagerOrAdmin) {
+      setViewScope('all');
+    }
+  }, [user]);
 
   const fetchLogs = async () => {
     setLoading(true);
@@ -62,22 +71,24 @@ export default function Activity() {
             Real-time immutable log of actions performed by officers, managers, and vendor partners.
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '12px' }}>
-          <Button 
-            onClick={() => setViewScope('all')} 
-            variant={viewScope === 'all' ? 'primary' : 'secondary'}
-            style={{ padding: '8px 16px', fontSize: '13px' }}
-          >
-            All Activity
-          </Button>
-          <Button 
-            onClick={() => setViewScope('mine')} 
-            variant={viewScope === 'mine' ? 'primary' : 'secondary'}
-            style={{ padding: '8px 16px', fontSize: '13px' }}
-          >
-            My Activity
-          </Button>
-        </div>
+        {isManagerOrAdmin && (
+          <div style={{ display: 'flex', gap: '12px' }}>
+            <Button 
+              onClick={() => setViewScope('all')} 
+              variant={viewScope === 'all' ? 'primary' : 'secondary'}
+              style={{ padding: '8px 16px', fontSize: '13px' }}
+            >
+              All Activity
+            </Button>
+            <Button 
+              onClick={() => setViewScope('mine')} 
+              variant={viewScope === 'mine' ? 'primary' : 'secondary'}
+              style={{ padding: '8px 16px', fontSize: '13px' }}
+            >
+              My Activity
+            </Button>
+          </div>
+        )}
       </div>
 
       {/* Activity logs listing */}
