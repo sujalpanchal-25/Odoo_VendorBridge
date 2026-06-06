@@ -13,15 +13,20 @@ export async function generateInvoicePDF(invoice, po, vendor) {
         try {
           const pdfBuffer = Buffer.concat(chunks);
           // Upload to ImageKit under /invoices/
-          const result = await imagekit.upload({
-            file: pdfBuffer,
-            fileName: `${invoice.invoiceNumber}.pdf`,
-            folder: '/invoices',
-            useUniqueFileName: false,
-          });
-          resolve({ url: result.url, fileId: result.fileId, buffer: pdfBuffer });
-        } catch (uploadError) {
-          reject(uploadError);
+          try {
+            const result = await imagekit.upload({
+              file: pdfBuffer,
+              fileName: `${invoice.invoiceNumber}.pdf`,
+              folder: '/invoices',
+              useUniqueFileName: false,
+            });
+            resolve({ url: result.url, fileId: result.fileId, buffer: pdfBuffer });
+          } catch (uploadError) {
+            console.warn('ImageKit upload failed. Falling back to local generation. Error:', uploadError.message);
+            resolve({ url: null, fileId: null, buffer: pdfBuffer });
+          }
+        } catch (err) {
+          reject(err);
         }
       });
       
