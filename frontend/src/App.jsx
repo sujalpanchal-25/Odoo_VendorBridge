@@ -16,6 +16,7 @@ import AuthLayout from './components/layout/AuthLayout.jsx';
 import Login from './pages/auth/Login.jsx';
 import Register from './pages/auth/Register.jsx';
 import ForgotPasswordPage from './pages/auth/ForgotPasswordPage.jsx';
+import AuthCallback from './pages/auth/AuthCallback.jsx';
 
 // Pages - Dashboard & General
 import Dashboard from './pages/Dashboard.jsx';
@@ -87,6 +88,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
         </Route>
 
         {/* Private dashboard routes */}
